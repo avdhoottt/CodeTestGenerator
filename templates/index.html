@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Test Case Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/github.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 transition-colors duration-200" data-theme="light">
+    <div class="min-h-screen p-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-800">Python Test Case Generator</h1>
+                <div class="flex space-x-4">
+                    <button id="themeToggle" class="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300">
+                        Toggle Theme
+                    </button>
+                    <select id="exportFormat" class="px-4 py-2 rounded-lg bg-white border">
+                        <option value="pytest">pytest</option>
+                        <option value="unittest">unittest</option>
+                    </select>
+                    <button id="exportBtn" class="px-4 py-2 rounded-lg bg-green-500 text-white hover:bg-green-600">
+                        Export Tests
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h2 class="text-xl font-semibold mb-4">Input Python Code</h2>
+                    <div id="editor" class="w-full h-[calc(100vh-300px)] border rounded-lg"></div>
+                    <button id="analyzeBtn" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg">
+                        Analyze Code
+                    </button>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h2 class="text-xl font-semibold mb-4">Code Analysis</h2>
+                        <div id="metrics" class="space-y-4"></div>
+                        <div id="suggestions" class="mt-4 space-y-2"></div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h2 class="text-xl font-semibold mb-4">Generated Test Cases</h2>
+                        <div class="space-x-2 mb-4">
+                            <button data-category="all"
+                                class="category-filter px-3 py-1 rounded-lg bg-blue-500 text-white">All</button>
+                            <button data-category="boundary"
+                                class="category-filter px-3 py-1 rounded-lg bg-gray-200">Boundary</button>
+                            <button data-category="edge"
+                                class="category-filter px-3 py-1 rounded-lg bg-gray-200">Edge</button>
+                            <button data-category="error"
+                                class="category-filter px-3 py-1 rounded-lg bg-gray-200">Error</button>
+                        </div>
+                        <div id="testCases" class="space-y-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
